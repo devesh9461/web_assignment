@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HeatGuard AI — Computer Heating Prevention Solution</title>
+  <meta name="description" content="AI-powered computer heating prevention solution. Diagnose overheating issues, explore 3D PC components, and get actionable strategies to keep your system cool.">
+  <meta name="keywords" content="computer heating, PC cooling, thermal management, CPU overheating, GPU temperature, AI diagnostics">
+  <meta name="author" content="HeatGuard AI">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon (inline SVG data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+</head>
+<body>
+  <!-- Preloader -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-spinner"></div>
+    <div class="preloader-text">Initializing HeatGuard AI...</div>
+  </div>
+
+  <!-- Scroll Progress -->
+  <div class="scroll-progress"></div>
+
+  <!-- Background Effects -->
+  <canvas id="particle-canvas"></canvas>
+  <div class="bg-grid"></div>
+  <div class="bg-radial-glow bg-glow-1"></div>
+  <div class="bg-radial-glow bg-glow-2"></div>
+  <div class="bg-radial-glow bg-glow-3"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <div class="logo-icon">🛡️</div>
+        <span>Heat<span class="gradient-text">Guard</span></span>
+      </a>
+      <div class="nav-links" id="nav-links">
+        <a href="#hero">Home</a>
+        <a href="#problems">Problems</a>
+        <a href="#components">Components</a>
+        <a href="#diagnostics">AI Diagnostics</a>
+        <a href="#dashboard">Monitor</a>
+        <a href="#solutions">Solutions</a>
+        <a href="#diagnostics" class="nav-cta">Analyze Now</a>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-overlay" id="nav-overlay"></div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section id="hero" class="section-padding">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="hero-badge">
+            <span class="pulse"></span>
+            AI-Powered Thermal Intelligence
+          </div>
+          <h1 class="hero-title">
+            <span class="line">Stop Your PC</span>
+            <span class="line">From <span class="gradient-text-hot highlight">Overheating</span></span>
+            <span class="line"><span class="gradient-text">Forever.</span></span>
+          </h1>
+          <p class="hero-description">
+            Advanced AI diagnostics engine that analyzes your system's thermal profile, identifies heating bottlenecks in real-time, and delivers actionable solutions tailored to your hardware.
+          </p>
+          <div class="hero-actions">
+            <a href="#diagnostics" class="btn-primary" id="hero-cta">
+              <span>🔍</span> Start AI Diagnosis
+            </a>
+            <a href="#components" class="btn-secondary">
+              <span>🖥️</span> Explore 3D Parts
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <div class="stat-value" data-count="15000" data-suffix="+">0</div>
+              <div class="stat-label">Systems Analyzed</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" data-count="98" data-suffix="%">0</div>
+              <div class="stat-label">Fix Success Rate</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" data-count="25" data-suffix="°C" data-prefix="−">0</div>
+              <div class="stat-label">Avg. Temp Drop</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3D PC Tower -->
+        <div class="hero-3d-scene">
+          <div class="heat-lines">
+            <div class="heat-line"></div>
+            <div class="heat-line"></div>
+            <div class="heat-line"></div>
+            <div class="heat-line"></div>
+            <div class="heat-line"></div>
+          </div>
+          <div class="pc-tower-3d">
+            <!-- Front Face -->
+            <div class="tower-face tower-front">
+              <div class="front-panel">
+                <div class="power-btn"></div>
+                <div class="front-fan-grille">
+                  <div class="fan-blade-hero">
+                    <div></div><div></div><div></div>
+                    <div></div><div></div><div></div>
+                  </div>
+                </div>
+                <div class="front-io-ports">
+                  <div class="io-port usb"></div>
+                  <div class="io-port usb"></div>
+                  <div class="io-port audio"></div>
+                  <div class="io-port audio"></div>
+                </div>
+                <div class="temp-overlay">
+                  <div class="temp-reading">
+                    <span class="value">42</span>
+                    <span class="unit">°C</span>
+                  </div>
+                  <div class="temp-label">System Temperature</div>
+                  <div class="temp-bar">
+                    <div class="temp-bar-fill"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Back Face -->
+            <div class="tower-face tower-back">
+              <div class="back-panel">
+                <div class="back-vent"></div>
+                <div class="back-vent"></div>
+                <div class="back-vent"></div>
+                <div class="back-fan">
+                  <div class="mini-fan" style="position:relative;">
+                    <div></div><div></div><div></div><div></div>
+                  </div>
+                </div>
+                <div class="back-vent"></div>
+                <div class="back-vent"></div>
+                <div class="back-vent"></div>
+                <div class="back-vent"></div>
+                <div class="back-vent"></div>
+              </div>
+            </div>
+            <!-- Side Faces -->
+            <div class="tower-face tower-left"></div>
+            <div class="tower-face tower-right"></div>
+            <div class="tower-face tower-top"></div>
+            <div class="tower-face tower-bottom"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROBLEMS SECTION ===== -->
+  <section id="problems" class="section-padding">
+    <div class="container">
+      <div class="animate-on-scroll" style="text-align:center;">
+        <div class="section-badge" style="margin:0 auto var(--space-lg);">
+          <span class="badge-dot"></span>
+          Common Heating Issues
+        </div>
+        <h2 class="section-title">Why Your PC <span class="gradient-text-hot">Overheats</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">Understanding the root causes of computer overheating is the first step towards an effective thermal management strategy.</p>
+      </div>
+
+      <div class="problems-grid">
+        <!-- Problem 1 -->
+        <div class="problem-card animate-on-scroll">
+          <div class="problem-icon">🌡️</div>
+          <h3>Dried Thermal Paste</h3>
+          <p>Over time, thermal compound degrades and dries out, creating air gaps between your CPU/GPU and heatsink that drastically reduce thermal conductivity.</p>
+          <div class="problem-severity">
+            <div class="severity-bar">
+              <div class="severity-fill critical" data-width="90%" style="width:0"></div>
+            </div>
+            <span class="severity-label critical">Critical</span>
+          </div>
+        </div>
+
+        <!-- Problem 2 -->
+        <div class="problem-card animate-on-scroll">
+          <div class="problem-icon">💨</div>
+          <h3>Poor Airflow Design</h3>
+          <p>Incorrect fan placement, blocked vents, or poor cable management creates dead zones where hot air recirculates instead of being exhausted.</p>
+          <div class="problem-severity">
+            <div class="severity-bar">
+              <div class="severity-fill high" data-width="75%" style="width:0"></div>
+            </div>
+            <span class="severity-label high">High</span>
+          </div>
+        </div>
+
+        <!-- Problem 3 -->
+        <div class="problem-card animate-on-scroll">
+          <div class="problem-icon">🕸️</div>
+          <h3>Dust Accumulation</h3>
+          <p>Dust acts as an insulating blanket on heatsinks and clogs fan bearings, reducing cooling capacity by up to 40% in severe cases.</p>
+          <div class="problem-severity">
+            <div class="severity-bar">
+              <div class="severity-fill high" data-width="80%" style="width:0"></div>
+            </div>
+            <span class="severity-label high">High</span>
+          </div>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="problem-card animate-on-scroll">
+          <div class="problem-icon">⚡</div>
+          <h3>Insufficient Cooling</h3>
+          <p>Stock coolers often can't handle sustained loads. High-performance CPUs and GPUs require aftermarket cooling solutions to maintain safe temperatures.</p>
+          <div class="problem-severity">
+            <div class="severity-bar">
+              <div class="severity-fill critical" data-width="85%" style="width:0"></div>
+            </div>
+            <span class="severity-label critical">Critical</span>
+          </div>
+        </div>
+
+        <!-- Problem 5 -->
+        <div class="problem-card animate-on-scroll">
+          <div class="problem-icon">🔧</div>
+          <h3>Overclocking Stress</h3>
+          <p>Pushing hardware beyond stock speeds increases voltage and heat output exponentially. Without upgraded cooling, overclocking leads to thermal throttling.</p>
+          <div class="problem-severity">
+            <div class="severity-bar">
+              <div class="severity-fill high" data-width="70%" style="width:0"></div>
+            </div>
+            <span class="severity-label high">High</span>
+          </div>
+        </div>
+
+        <!-- Problem 6 -->
+        <div class="problem-card animate-on-scroll">
+          <div class="problem-icon">🏠</div>
+          <h3>Ambient Temperature</h3>
+          <p>High room temperatures directly impact cooling efficiency. A 5°C rise in ambient temperature translates to a similar increase in component temperatures.</p>
+          <div class="problem-severity">
+            <div class="severity-bar">
+              <div class="severity-fill medium" data-width="55%" style="width:0"></div>
+            </div>
+            <span class="severity-label medium">Medium</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMPONENTS 3D SECTION ===== -->
+  <section id="components" class="section-padding">
+    <div class="container">
+      <div class="animate-on-scroll" style="text-align:center;">
+        <div class="section-badge" style="margin:0 auto var(--space-lg);">
+          <span class="badge-dot"></span>
+          Interactive 3D Components
+        </div>
+        <h2 class="section-title">Explore PC Parts in <span class="gradient-text">3D</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">Interact with detailed 3D models of key PC components. Understand how each part generates and dissipates heat.</p>
+      </div>
+
+      <div class="components-showcase">
+        <!-- CPU Card -->
+        <div class="component-card animate-on-scroll">
+          <div class="component-3d-view">
+            <div class="component-3d">
+              <div class="cpu-3d">
+                <div class="cpu-top">
+                  <div class="cpu-ihs"></div>
+                </div>
+                <div class="cpu-substrate"></div>
+                <div class="cpu-pins">
+                  <div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div>
+                  <div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div>
+                  <div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div>
+                  <div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div>
+                  <div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div>
+                  <div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div><div class="cpu-pin"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">🔲 Central Processing Unit</div>
+            <div class="component-type">CPU — The Brain of Your PC</div>
+            <p class="component-desc">The CPU is the primary heat source in most systems. Modern processors can draw 65W-250W, generating significant thermal energy that must be efficiently dissipated.</p>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Safe Zone</span>
+              <span class="temp-range-value safe">30°C — 65°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Warning Zone</span>
+              <span class="temp-range-value warn">65°C — 85°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Danger Zone</span>
+              <span class="temp-range-value danger">85°C — 105°C</span>
+            </div>
+            <div class="component-solutions">
+              <h4>🔧 Cooling Solutions</h4>
+              <div class="solution-list">
+                <div class="solution-item"><span class="check">✓</span> Apply premium thermal paste (Thermal Grizzly Kryonaut)</div>
+                <div class="solution-item"><span class="check">✓</span> Upgrade to tower cooler or AIO liquid cooling</div>
+                <div class="solution-item"><span class="check">✓</span> Ensure proper cooler mounting pressure</div>
+                <div class="solution-item"><span class="check">✓</span> Consider delidding for extreme cooling needs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GPU Card -->
+        <div class="component-card animate-on-scroll">
+          <div class="component-3d-view">
+            <div class="component-3d" style="animation-delay: -2s;">
+              <div class="gpu-3d">
+                <div class="gpu-pcb">
+                  <div class="gpu-fans">
+                    <div class="gpu-fan">
+                      <div class="gpu-fan-blades">
+                        <div></div><div></div><div></div><div></div><div></div>
+                      </div>
+                    </div>
+                    <div class="gpu-fan">
+                      <div class="gpu-fan-blades" style="animation-direction: reverse;">
+                        <div></div><div></div><div></div><div></div><div></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="gpu-chip-area">
+                    <div class="chip"></div>
+                    <div class="gpu-vram">
+                      <div class="vram-chip"></div><div class="vram-chip"></div>
+                      <div class="vram-chip"></div><div class="vram-chip"></div>
+                      <div class="vram-chip"></div><div class="vram-chip"></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="gpu-backplate"></div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">🎮 Graphics Processing Unit</div>
+            <div class="component-type">GPU — The Visual Powerhouse</div>
+            <p class="component-desc">Modern GPUs can draw 150W-450W under full load, making them the biggest heat generators. VRAM chips also need proper thermal management.</p>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Safe Zone</span>
+              <span class="temp-range-value safe">30°C — 70°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Warning Zone</span>
+              <span class="temp-range-value warn">70°C — 90°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Danger Zone</span>
+              <span class="temp-range-value danger">90°C — 110°C</span>
+            </div>
+            <div class="component-solutions">
+              <h4>🔧 Cooling Solutions</h4>
+              <div class="solution-list">
+                <div class="solution-item"><span class="check">✓</span> Replace thermal pads on VRAM modules</div>
+                <div class="solution-item"><span class="check">✓</span> Undervolt for cooler operation without performance loss</div>
+                <div class="solution-item"><span class="check">✓</span> Set aggressive custom fan curves</div>
+                <div class="solution-item"><span class="check">✓</span> Ensure 2-3 slot spacing for airflow</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RAM Card -->
+        <div class="component-card animate-on-scroll">
+          <div class="component-3d-view">
+            <div class="component-3d" style="animation-delay: -4s;">
+              <div class="ram-3d">
+                <div class="ram-stick">
+                  <div class="ram-rgb"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                  <div class="ram-chip-3d"></div>
+                </div>
+                <div class="ram-contacts">
+                  <div class="ram-contact"></div><div class="ram-contact"></div>
+                  <div class="ram-contact"></div><div class="ram-contact"></div>
+                  <div class="ram-contact"></div><div class="ram-contact"></div>
+                  <div class="ram-contact"></div><div class="ram-contact"></div>
+                  <div class="ram-contact"></div><div class="ram-contact"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">💾 Random Access Memory</div>
+            <div class="component-type">RAM — High-Speed Data Storage</div>
+            <p class="component-desc">While RAM generates less heat than CPU/GPU, DDR5 memory running at high frequencies can reach concerning temperatures, especially without heatspreaders.</p>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Safe Zone</span>
+              <span class="temp-range-value safe">25°C — 45°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Warning Zone</span>
+              <span class="temp-range-value warn">45°C — 65°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Danger Zone</span>
+              <span class="temp-range-value danger">65°C — 85°C</span>
+            </div>
+            <div class="component-solutions">
+              <h4>🔧 Cooling Solutions</h4>
+              <div class="solution-list">
+                <div class="solution-item"><span class="check">✓</span> Install RAM modules with integrated heatspreaders</div>
+                <div class="solution-item"><span class="check">✓</span> Ensure direct airflow over DIMMs from case fans</div>
+                <div class="solution-item"><span class="check">✓</span> Avoid placing RAM directly under CPU cooler exhaust</div>
+                <div class="solution-item"><span class="check">✓</span> Use XMP profiles within thermal-safe limits</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cooling Fan Card -->
+        <div class="component-card animate-on-scroll">
+          <div class="component-3d-view">
+            <div class="component-3d" style="animation-delay: -1s;">
+              <div class="fan-3d">
+                <div class="fan-frame">
+                  <div class="fan-ring"></div>
+                  <div class="fan-hub"></div>
+                  <div class="fan-blades-3d">
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                    <div class="blade"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">🌀 Cooling Fans</div>
+            <div class="component-type">Active Cooling — The First Line of Defense</div>
+            <p class="component-desc">Case fans create the airflow essential for heat removal. Proper fan placement (positive pressure) prevents dust while maximizing cooling efficiency.</p>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Optimal RPM</span>
+              <span class="temp-range-value safe">800 — 1200 RPM</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">High Load RPM</span>
+              <span class="temp-range-value warn">1200 — 1800 RPM</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Maximum RPM</span>
+              <span class="temp-range-value danger">1800 — 2500+ RPM</span>
+            </div>
+            <div class="component-solutions">
+              <h4>🔧 Optimization Tips</h4>
+              <div class="solution-list">
+                <div class="solution-item"><span class="check">✓</span> 2 intake front + 1 exhaust rear = positive pressure</div>
+                <div class="solution-item"><span class="check">✓</span> Use PWM fans for intelligent speed control</div>
+                <div class="solution-item"><span class="check">✓</span> Clean fan blades every 3 months</div>
+                <div class="solution-item"><span class="check">✓</span> Replace after 40,000+ hours of operation</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PSU Card -->
+        <div class="component-card animate-on-scroll">
+          <div class="component-3d-view">
+            <div class="component-3d" style="animation-delay: -3s;">
+              <div class="psu-3d">
+                <div class="psu-body">
+                  <div class="psu-fan">
+                    <div class="psu-fan-blades">
+                      <div></div><div></div><div></div>
+                      <div></div><div></div><div></div>
+                    </div>
+                  </div>
+                  <div class="psu-label">750W GOLD</div>
+                </div>
+                <div class="psu-back"></div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">🔌 Power Supply Unit</div>
+            <div class="component-type">PSU — The Energy Heart</div>
+            <p class="component-desc">PSUs convert AC to DC with 80-94% efficiency. The remaining energy becomes heat. Higher-rated (Gold/Platinum) PSUs run significantly cooler.</p>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Safe Zone</span>
+              <span class="temp-range-value safe">30°C — 45°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Warning Zone</span>
+              <span class="temp-range-value warn">45°C — 60°C</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Danger Zone</span>
+              <span class="temp-range-value danger">60°C — 80°C</span>
+            </div>
+            <div class="component-solutions">
+              <h4>🔧 Cooling Solutions</h4>
+              <div class="solution-list">
+                <div class="solution-item"><span class="check">✓</span> Upgrade to 80+ Gold or Platinum rated PSU</div>
+                <div class="solution-item"><span class="check">✓</span> Mount PSU fan-down for independent airflow</div>
+                <div class="solution-item"><span class="check">✓</span> Keep PSU filter clean</div>
+                <div class="solution-item"><span class="check">✓</span> Use modular cables to reduce clutter</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Heatsink Card -->
+        <div class="component-card animate-on-scroll">
+          <div class="component-3d-view">
+            <div class="component-3d" style="animation-delay: -5s;">
+              <div class="heatsink-3d">
+                <div class="heatsink-fins">
+                  <div class="fin"></div><div class="fin"></div><div class="fin"></div>
+                  <div class="fin"></div><div class="fin"></div><div class="fin"></div>
+                  <div class="fin"></div><div class="fin"></div><div class="fin"></div>
+                  <div class="fin"></div><div class="fin"></div><div class="fin"></div>
+                </div>
+                <div class="heatsink-base"></div>
+                <div class="heatsink-heatpipes">
+                  <div class="heatpipe"></div>
+                  <div class="heatpipe"></div>
+                  <div class="heatpipe"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="component-info">
+            <div class="component-name">🧊 Heatsink & Heatpipes</div>
+            <div class="component-type">Passive Cooling — Heat Transfer Technology</div>
+            <p class="component-desc">Heatsinks use aluminum or copper fins to increase surface area for heat dissipation. Heatpipes use phase-change to rapidly transfer heat away from hotspots.</p>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Copper Conductivity</span>
+              <span class="temp-range-value safe">401 W/m·K</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Aluminum Conductivity</span>
+              <span class="temp-range-value warn">237 W/m·K</span>
+            </div>
+            <div class="component-temp-range">
+              <span class="temp-range-label">Air Conductivity</span>
+              <span class="temp-range-value danger">0.024 W/m·K</span>
+            </div>
+            <div class="component-solutions">
+              <h4>🔧 Optimization Tips</h4>
+              <div class="solution-list">
+                <div class="solution-item"><span class="check">✓</span> Choose copper-base heatsinks for best conductivity</div>
+                <div class="solution-item"><span class="check">✓</span> Direct-contact heatpipes outperform flat bases</div>
+                <div class="solution-item"><span class="check">✓</span> Orient heatsink fins for natural convection alignment</div>
+                <div class="solution-item"><span class="check">✓</span> Keep fin gaps free of dust buildup</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AI DIAGNOSTICS SECTION ===== -->
+  <section id="diagnostics" class="section-padding">
+    <div class="container">
+      <div class="animate-on-scroll" style="text-align:center;">
+        <div class="section-badge" style="margin:0 auto var(--space-lg);">
+          <span class="badge-dot"></span>
+          AI-Powered Analysis
+        </div>
+        <h2 class="section-title">Smart <span class="gradient-text">Diagnostics</span> Engine</h2>
+        <p class="section-subtitle" style="margin:0 auto;">Select your symptoms and current temperature. Our AI engine will analyze your thermal profile and provide tailored recommendations.</p>
+      </div>
+
+      <div class="diagnostics-layout">
+        <!-- Input Panel -->
+        <div class="diagnostics-panel animate-on-scroll">
+          <div class="panel-header">
+            <div class="panel-header-icon">🔬</div>
+            <h3>System Symptoms</h3>
+            <span class="ai-badge">AI Powered</span>
+          </div>
+          <div class="panel-body">
+            <div class="symptom-group">
+              <label>Select Observed Symptoms</label>
+              <div class="symptom-options">
+                <div class="symptom-chip" data-symptom="sudden-shutdown">💥 Sudden Shutdowns</div>
+                <div class="symptom-chip" data-symptom="loud-fans">🔊 Loud Fan Noise</div>
+                <div class="symptom-chip" data-symptom="performance-drop">📉 Performance Drops</div>
+                <div class="symptom-chip" data-symptom="high-idle-temps">🌡️ High Idle Temps</div>
+                <div class="symptom-chip" data-symptom="blue-screen">🟦 Blue Screens</div>
+                <div class="symptom-chip" data-symptom="gpu-artifacts">🖼️ GPU Artifacts</div>
+                <div class="symptom-chip" data-symptom="hot-exhaust">🔥 Hot Exhaust Air</div>
+                <div class="symptom-chip" data-symptom="dust-buildup">🕸️ Visible Dust</div>
+              </div>
+            </div>
+
+            <div class="temp-slider-group">
+              <label>Current System Temperature</label>
+              <div class="slider-container">
+                <input type="range" id="temp-slider" class="temp-slider" min="25" max="100" value="55">
+                <div class="slider-value" id="temp-value">55°C</div>
+                <div class="slider-labels">
+                  <span>25°C Cool</span>
+                  <span>60°C Warm</span>
+                  <span>100°C 🔥</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="analyze-btn" id="analyze-btn">
+              <div class="spinner"></div>
+              <span class="btn-text">🧠 Run AI Analysis</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="diagnostics-panel results-panel animate-on-scroll">
+          <div class="panel-header">
+            <div class="panel-header-icon">📊</div>
+            <h3>Analysis Results</h3>
+          </div>
+          <div class="results-placeholder">
+            <div class="placeholder-icon">🔍</div>
+            <p>Select symptoms and click "Run AI Analysis" to receive personalized recommendations for your system.</p>
+          </div>
+          <div class="results-content">
+            <div class="result-score">
+              <div class="score-circle">
+                <svg viewBox="0 0 120 120">
+                  <circle class="score-bg" cx="60" cy="60" r="52"></circle>
+                  <circle class="score-progress" cx="60" cy="60" r="52"></circle>
+                </svg>
+                <span class="score-value">0</span>
+              </div>
+              <div class="score-label">Risk Level</div>
+            </div>
+            <div class="result-recommendations"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TEMPERATURE DASHBOARD ===== -->
+  <section id="dashboard" class="section-padding">
+    <div class="container">
+      <div class="animate-on-scroll" style="text-align:center;">
+        <div class="section-badge" style="margin:0 auto var(--space-lg);">
+          <span class="badge-dot"></span>
+          Real-Time Monitoring
+        </div>
+        <h2 class="section-title">Live Temperature <span class="gradient-text">Dashboard</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">Simulated real-time temperature monitoring across all critical system components.</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- CPU Temp -->
+        <div class="temp-card animate-on-scroll" data-base-temp="62" data-variance="20">
+          <div class="temp-card-icon">🔲</div>
+          <div class="temp-card-name">CPU Core</div>
+          <div class="temp-card-value">62°C</div>
+          <span class="temp-card-status status-normal">Normal</span>
+          <div class="temp-card-chart">
+            <svg class="mini-chart" viewBox="0 0 200 60" preserveAspectRatio="none">
+              <polyline class="chart-area" points="0,60 0,60 200,60" fill="rgba(0,229,255,0.1)"/>
+              <polyline points="0,30 200,30" stroke="rgba(0,229,255,0.6)"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- GPU Temp -->
+        <div class="temp-card animate-on-scroll" data-base-temp="68" data-variance="25">
+          <div class="temp-card-icon">🎮</div>
+          <div class="temp-card-name">GPU Core</div>
+          <div class="temp-card-value">68°C</div>
+          <span class="temp-card-status status-normal">Normal</span>
+          <div class="temp-card-chart">
+            <svg class="mini-chart" viewBox="0 0 200 60" preserveAspectRatio="none">
+              <polyline class="chart-area" points="0,60 0,60 200,60" fill="rgba(124,77,255,0.1)"/>
+              <polyline points="0,30 200,30" stroke="rgba(124,77,255,0.6)"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- RAM Temp -->
+        <div class="temp-card animate-on-scroll" data-base-temp="42" data-variance="12">
+          <div class="temp-card-icon">💾</div>
+          <div class="temp-card-name">Memory</div>
+          <div class="temp-card-value">42°C</div>
+          <span class="temp-card-status status-normal">Normal</span>
+          <div class="temp-card-chart">
+            <svg class="mini-chart" viewBox="0 0 200 60" preserveAspectRatio="none">
+              <polyline class="chart-area" points="0,60 0,60 200,60" fill="rgba(0,230,118,0.1)"/>
+              <polyline points="0,30 200,30" stroke="rgba(0,230,118,0.6)"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Storage Temp -->
+        <div class="temp-card animate-on-scroll" data-base-temp="38" data-variance="10">
+          <div class="temp-card-icon">💽</div>
+          <div class="temp-card-name">NVMe SSD</div>
+          <div class="temp-card-value">38°C</div>
+          <span class="temp-card-status status-normal">Normal</span>
+          <div class="temp-card-chart">
+            <svg class="mini-chart" viewBox="0 0 200 60" preserveAspectRatio="none">
+              <polyline class="chart-area" points="0,60 0,60 200,60" fill="rgba(255,214,0,0.1)"/>
+              <polyline points="0,30 200,30" stroke="rgba(255,214,0,0.6)"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SOLUTIONS TIMELINE ===== -->
+  <section id="solutions" class="section-padding">
+    <div class="container">
+      <div class="animate-on-scroll" style="text-align:center;">
+        <div class="section-badge" style="margin:0 auto var(--space-lg);">
+          <span class="badge-dot"></span>
+          Actionable Strategies
+        </div>
+        <h2 class="section-title">Step-by-Step <span class="gradient-text">Solutions</span></h2>
+        <p class="section-subtitle" style="margin:0 auto;">Follow this proven methodology to systematically reduce your PC's temperature and extend component lifespan.</p>
+      </div>
+
+      <div class="solutions-timeline">
+        <!-- Step 1 -->
+        <div class="solution-step">
+          <div class="step-marker">1</div>
+          <div class="step-content">
+            <h3>🔍 Diagnose & Benchmark</h3>
+            <p>Start by establishing baseline temperatures using HWMonitor, Core Temp, or HWiNFO64. Run stress tests (Prime95 for CPU, FurMark for GPU) to identify which components overheat under load.</p>
+            <div class="step-tags">
+              <span class="step-tag">HWMonitor</span>
+              <span class="step-tag">Core Temp</span>
+              <span class="step-tag">Prime95</span>
+              <span class="step-tag">FurMark</span>
+            </div>
+            <div class="step-effectiveness">
+              <span class="effectiveness-label">Impact</span>
+              <div class="effectiveness-bar">
+                <div class="effectiveness-fill" data-width="65%"></div>
+              </div>
+              <span class="effectiveness-value">65%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="solution-step">
+          <div class="step-marker">2</div>
+          <div class="step-content">
+            <h3>🧹 Deep Clean All Components</h3>
+            <p>Power down and unplug. Use compressed air (hold fans to prevent spinning) to clean heatsinks, fan blades, mesh filters, and PCB surfaces. Use isopropyl alcohol for stubborn residue.</p>
+            <div class="step-tags">
+              <span class="step-tag">Compressed Air</span>
+              <span class="step-tag">Isopropyl Alcohol</span>
+              <span class="step-tag">Anti-Static</span>
+            </div>
+            <div class="step-effectiveness">
+              <span class="effectiveness-label">Impact</span>
+              <div class="effectiveness-bar">
+                <div class="effectiveness-fill" data-width="80%"></div>
+              </div>
+              <span class="effectiveness-value">80%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="solution-step">
+          <div class="step-marker">3</div>
+          <div class="step-content">
+            <h3>🧴 Replace Thermal Interface Material</h3>
+            <p>Remove old thermal paste with 99% isopropyl alcohol and lint-free cloth. Apply a grain-of-rice amount of quality thermal paste (Thermal Grizzly Kryonaut or Noctua NT-H1). Re-seat cooler with even mounting pressure.</p>
+            <div class="step-tags">
+              <span class="step-tag">Thermal Grizzly</span>
+              <span class="step-tag">Noctua NT-H1</span>
+              <span class="step-tag">Arctic MX-4</span>
+            </div>
+            <div class="step-effectiveness">
+              <span class="effectiveness-label">Impact</span>
+              <div class="effectiveness-bar">
+                <div class="effectiveness-fill" data-width="90%"></div>
+              </div>
+              <span class="effectiveness-value">90%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="solution-step">
+          <div class="step-marker">4</div>
+          <div class="step-content">
+            <h3>💨 Optimize Airflow Architecture</h3>
+            <p>Configure a positive-pressure setup: 2-3 intake fans (front/bottom) with 1-2 exhaust fans (rear/top). Route cables behind the motherboard tray. Remove unused drive cages blocking airflow.</p>
+            <div class="step-tags">
+              <span class="step-tag">Positive Pressure</span>
+              <span class="step-tag">Cable Management</span>
+              <span class="step-tag">Fan Placement</span>
+            </div>
+            <div class="step-effectiveness">
+              <span class="effectiveness-label">Impact</span>
+              <div class="effectiveness-bar">
+                <div class="effectiveness-fill" data-width="85%"></div>
+              </div>
+              <span class="effectiveness-value">85%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="solution-step">
+          <div class="step-marker">5</div>
+          <div class="step-content">
+            <h3>🖥️ Upgrade Cooling Hardware</h3>
+            <p>If stock cooling isn't sufficient, upgrade to a quality tower cooler (Noctua NH-D15, be quiet! Dark Rock Pro) or AIO liquid cooler (Arctic Liquid Freezer II). For GPU, consider aftermarket cooler or custom loop.</p>
+            <div class="step-tags">
+              <span class="step-tag">Tower Cooler</span>
+              <span class="step-tag">AIO Liquid</span>
+              <span class="step-tag">Custom Loop</span>
+            </div>
+            <div class="step-effectiveness">
+              <span class="effectiveness-label">Impact</span>
+              <div class="effectiveness-bar">
+                <div class="effectiveness-fill" data-width="95%"></div>
+              </div>
+              <span class="effectiveness-value">95%</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="solution-step">
+          <div class="step-marker">6</div>
+          <div class="step-content">
+            <h3>⚙️ Software Optimization & Monitoring</h3>
+            <p>Configure intelligent fan curves in BIOS/UEFI. Use software undervolting (ThrottleStop for CPU, MSI Afterburner for GPU) to reduce heat without performance loss. Set up continuous monitoring alerts.</p>
+            <div class="step-tags">
+              <span class="step-tag">ThrottleStop</span>
+              <span class="step-tag">MSI Afterburner</span>
+              <span class="step-tag">Fan Curves</span>
+              <span class="step-tag">Undervolting</span>
+            </div>
+            <div class="step-effectiveness">
+              <span class="effectiveness-label">Impact</span>
+              <div class="effectiveness-bar">
+                <div class="effectiveness-fill" data-width="88%"></div>
+              </div>
+              <span class="effectiveness-value">88%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-icon">🛡️</div>
+            <span>Heat<span class="gradient-text">Guard</span> AI</span>
+          </div>
+          <p>AI-powered computer thermal management platform. Analyze, diagnose, and solve PC heating issues with data-driven precision.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Features</h4>
+          <a href="#problems">Problem Analysis</a>
+          <a href="#components">3D Components</a>
+          <a href="#diagnostics">AI Diagnostics</a>
+          <a href="#dashboard">Temp Monitor</a>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <a href="#solutions">Solutions Guide</a>
+          <a href="#components">Hardware Guide</a>
+          <a href="#diagnostics">System Check</a>
+          <a href="#">Documentation</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 HeatGuard AI. All rights reserved. Built with ❤️ for PC enthusiasts.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="GitHub">⚡</a>
+          <a href="#" class="social-link" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-link" aria-label="Discord">💬</a>
+          <a href="#" class="social-link" aria-label="YouTube">📺</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>
